@@ -12,8 +12,6 @@ import (
 	"github.com/redpanda-data/benthos/v4/public/service"
 	"github.com/spf13/afero"
 	"github.com/tetratelabs/wazero"
-	"github.com/tetratelabs/wazero/experimental"
-	"github.com/tetratelabs/wazero/experimental/logging"
 	"github.com/tetratelabs/wazero/experimental/sysfs"
 	"github.com/tetratelabs/wazero/imports/emscripten"
 	wasip1 "github.com/tetratelabs/wazero/imports/wasi_snapshot_preview1"
@@ -49,7 +47,6 @@ type gsProcessor struct {
 
 func newGhostscriptProcessor() (*gsProcessor, error) {
 	ctx := context.Background()
-	ctx = experimental.WithFunctionListenerFactory(ctx, logging.NewHostLoggingListenerFactory(os.Stdout, logging.LogScopeFilesystem))
 	runtimeConfig := wazero.NewRuntimeConfig().WithCloseOnContextDone(true)
 	wazeroRuntime := wazero.NewRuntimeWithConfig(ctx, runtimeConfig)
 
