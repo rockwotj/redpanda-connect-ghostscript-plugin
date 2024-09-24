@@ -63,7 +63,6 @@ func newGhostscriptProcessor() (*gsProcessor, error) {
 	}
 
 	fsConfig := wazero.NewFSConfig()
-	fsConfig = fsConfig.WithFSMount(sharedFiles, "/ghostscript")
 	mfs := NewInMemoryWasmFS()
 	fsConfig = fsConfig.(sysfs.FSConfig).WithSysFSMount(mfs, "/rpcn")
 	moduleConfig := wazero.NewModuleConfig().
